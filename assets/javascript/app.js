@@ -1,3 +1,5 @@
+var letters = ["a","b","c","d"];
+
 const quizQuestions = [
 
 {
@@ -128,15 +130,23 @@ function Setup () {
   for(var i = 0; i < quizQuestions.length; i++) {
 
     $("#quiz").append(quizQuestions[i].question);
-    $("#quiz").append("<br/>" +quizQuestions[i].answers.a);
-    $("#quiz").append("<br/>" +quizQuestions[i].answers.b);
-    $("#quiz").append("<br/>" +quizQuestions[i].answers.c);
-    $("#quiz").append("<br/>" +quizQuestions[i].answers.d+ "<br/> <br/>");
+    $("#quiz").append(
+      '<form>',
+      '<input type="radio" name="quiz" value="a">',quizQuestions[i].answers.a,'<br>',
+      '<input type="radio" name="quiz" value="a">',quizQuestions[i].answers.b,'<br>',
+     '<input type="radio" name="quiz" value="a">',quizQuestions[i].answers.c,'<br>',
+    '<input type="radio" name="quiz" value="a">',quizQuestions[i].answers.d,'<br>',
+    )
+    };
 
-
+    $("#quiz").append("</form>")
+      
+      
+      
+  
 
 };
 
-}
+
 
 Setup();
