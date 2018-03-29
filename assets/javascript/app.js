@@ -1,5 +1,9 @@
-var letters = ["a","b","c","d"];
 
+ 
+
+var intervalId;
+var letters = ["a","b","c","d"];
+var clock = 0;
 const quizQuestions = [
 
 {
@@ -125,28 +129,71 @@ const quizQuestions = [
 
 ]
 
+
+
+
+
+
 function Setup () {
 
-  for(var i = 0; i < quizQuestions.length; i++) {
+  var i = 0;
+  var questionNumber = 0;
+
+  for(i = 0; i < quizQuestions.length; i++) {
 
     $("#quiz").append(quizQuestions[i].question);
     $("#quiz").append(
       '<form>',
-      '<input type="radio" name="quiz" value="a">',quizQuestions[i].answers.a,'<br>',
-      '<input type="radio" name="quiz" value="a">',quizQuestions[i].answers.b,'<br>',
-     '<input type="radio" name="quiz" value="a">',quizQuestions[i].answers.c,'<br>',
-    '<input type="radio" name="quiz" value="a">',quizQuestions[i].answers.d,'<br>',
+      '<input type="radio" name="quiz' +questionNumber+'" value="a">',quizQuestions[i].answers.a,'<br>',
+      '<input type="radio" name="quiz' +questionNumber+'" value="b">',quizQuestions[i].answers.b,'<br>',
+     '<input type="radio" name="quiz' +questionNumber+'" value="c">',quizQuestions[i].answers.c,'<br>',
+    '<input type="radio" name="quiz' +questionNumber+'" value="d">',quizQuestions[i].answers.d,'<br>',
     )
+    questionNumber++;
     };
 
     $("#quiz").append("</form>")
-      
-      
-      
+    
   
+
+  };
+
+function Score() {
+  var score = 0;
+  for(j = 0; j < 10; j++){
+
+    if($('input[name=quiz' +j+ ']:checked').val() === quizQuestions[j].correct) {score++};
+  
+    console.log(score);
+  
+  }
+
 
 };
 
 
 
+setTimeout(Timer, 10000);
+
+
+function Timer() {
+  
+  intervalId = setInterval(Count(), 10)
+  
+Score();
+}
+
+function Count() {
+
+  
+  clock++;
+  $("#titleTimer").text(clock);
+};
+
 Setup();
+Timer();
+$("#score").on("click", function() {
+
+  Score();
+
+});
