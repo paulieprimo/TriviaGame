@@ -1,9 +1,9 @@
 
  
 
-var intervalId;
-var letters = ["a","b","c","d"];
-var clock = 0;
+
+
+
 const quizQuestions = [
 
 {
@@ -132,9 +132,33 @@ const quizQuestions = [
 
 
 
+var letters = ["a","b","c","d"];
+var score = 0;
 
 
-function Setup () {
+
+var time = 0;
+
+
+function start() {
+intervalId = setInterval(count, 1000);
+}
+
+function count() {
+
+time++;
+var converted = time;
+$("#timer").text(converted);
+if(converted === 90) { 
+
+  Score();
+  alert("Your Score is " +score+"/10!");
+
+}
+
+};
+
+function Setup() {
 
   var i = 0;
   var questionNumber = 0;
@@ -143,11 +167,13 @@ function Setup () {
 
     $("#quiz").append(quizQuestions[i].question);
     $("#quiz").append(
+      '<br>',
       '<form>',
       '<input type="radio" name="quiz' +questionNumber+'" value="a">',quizQuestions[i].answers.a,'<br>',
       '<input type="radio" name="quiz' +questionNumber+'" value="b">',quizQuestions[i].answers.b,'<br>',
      '<input type="radio" name="quiz' +questionNumber+'" value="c">',quizQuestions[i].answers.c,'<br>',
     '<input type="radio" name="quiz' +questionNumber+'" value="d">',quizQuestions[i].answers.d,'<br>',
+    '<br>'
     )
     questionNumber++;
     };
@@ -159,7 +185,7 @@ function Setup () {
   };
 
 function Score() {
-  var score = 0;
+
   for(j = 0; j < 10; j++){
 
     if($('input[name=quiz' +j+ ']:checked').val() === quizQuestions[j].correct) {score++};
@@ -171,27 +197,9 @@ function Score() {
 
 };
 
-
-
-setTimeout(Timer, 10000);
-
-
-function Timer() {
-  
-  intervalId = setInterval(Count(), 10)
-  
-Score();
-}
-
-function Count() {
-
-  
-  clock++;
-  $("#titleTimer").text(clock);
-};
-
+start();
 Setup();
-Timer();
+
 $("#score").on("click", function() {
 
   Score();
