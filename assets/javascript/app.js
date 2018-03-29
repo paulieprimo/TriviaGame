@@ -153,6 +153,7 @@ if(converted === 90) {
 
   Score();
   alert("Your Score is " +score+"/10!");
+  location.reload();
 
 }
 
